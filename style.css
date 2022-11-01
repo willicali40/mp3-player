@@ -99,3 +99,16 @@ body {
     display: none;
     cursor: not-allowed;
 }
+
+.progress-bar {
+    width: 350px;
+    height: 15px;
+    background-color: var(--background-color-2);
+    margin: 0 auto;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: var(--dark-purple);
+}
