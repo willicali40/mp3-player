@@ -9,8 +9,9 @@ const album = document.querySelector('#album');
 const title = document.querySelector('#tittle');
 const artist = document.querySelector('#artist');
 const progressBar = document.querySelector('#progress-bar');
-const currentTimeDisplay = document.querySelector('#currentTime');
-const totalTimeDisplay = document.querySelector('#totalTime');
+const progress = document.querySelector('#progress');
+const currentTime = document.querySelector('#curentime');
+const durationTime = document.querySelector('#durationtime');
 
 previousButton.addEventListener('click', previous);
 playButton.addEventListener('click', play);
@@ -51,7 +52,7 @@ const track = new Audio();
 
 // page loaded
 window.addEventListener('load', () => {
-    track.addEventListener('timeupdate', updateTime)
+    track.addEventListener('timeupdate', updateTime);
     track.src = tracks[0].track;
 })
 
@@ -74,6 +75,8 @@ function next() {
     track.pause();
     previousButtonUnable.style.display = 'none';
     previousButton.style.display = 'block';
+    playButton.style.display = 'none';
+    pauseButton.style.display = 'block';
 
     counter++;
     console.log(counter);
@@ -158,8 +161,44 @@ function updateTime() {
     if (duration === 100) {
         next();
     }
+
+
+
+    timingSongs();
 }
 
 function timeSelected(e) {
-    console.log(e);
+    let position = e.offsetX;
+    const percent = Math.floor((e.offsetX / 350) * 100);
+    track.currentTime = (percent * track.duration) / 100;
+
+    console.log(position);
+    console.log(percent);
+    console.log(track.duration);
+}
+
+function timingSongs() {
+    let currentMinutes = Math.floor(track.currentTime / 60);
+    let currentSeconds = Math.floor(track.currentTime - currentMinutes * 60);
+    let totalMinutes = Math.floor(track.duration / 60);
+    let totalSeconds = Math.floor(track.duration - totalMinutes * 60);
+
+    if (currentMinutes < 10) {
+        currentMinutes = '0' + currentMinutes;
+    }
+
+    if (currentSeconds < 10) {
+        currentSeconds = '0' + currentSeconds;
+    }
+
+    if (totalMinutes < 10) {
+        totalMinutes = '0' + totalMinutes;
+    }
+
+    if (totalSeconds < 10) {
+        totalSeconds = '0' + totalSeconds;
+    }
+
+    currentTime.innerHTML = currentMinutes + ':' + currentSeconds;
+    durationTime.innerHTML = totalMinutes + ':' + totalSeconds;
 }
