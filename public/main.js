@@ -12,12 +12,23 @@ const progressBar = document.querySelector('#progress-bar');
 const progress = document.querySelector('#progress');
 const currentTime = document.querySelector('#curentime');
 const durationTime = document.querySelector('#durationtime');
+const listIcon = document.querySelector('#playerlisticon');
+const song1 = document.querySelector('#song1');
+const song2 = document.querySelector('#song2');
+const song3 = document.querySelector('#song3');
+const song4 = document.querySelector('#song4');
+
 
 previousButton.addEventListener('click', previous);
 playButton.addEventListener('click', play);
 pauseButton.addEventListener('click', pause);
 nextButton.addEventListener('click', next);
 progressBar.addEventListener('click', timeSelected);
+listIcon.addEventListener('click', displayList);
+song1.addEventListener('click', playSongFromList);
+song2.addEventListener('click', playSongFromList);
+song3.addEventListener('click', playSongFromList);
+song4.addEventListener('click', playSongFromList);
 
 // playlist
 const tracks = [
@@ -201,4 +212,76 @@ function timingSongs() {
 
     currentTime.innerHTML = currentMinutes + ':' + currentSeconds;
     durationTime.innerHTML = totalMinutes + ':' + totalSeconds;
+}
+
+
+// list of songs
+
+let act = false;
+
+function displayList() {
+    if (act === false) {
+        act = true;
+        menu.style.transition = 'transform 2s';
+        menu.style.transform = 'translateX(325px)';
+    } else {
+        act = false;
+        menu.style.transition = 'transform 2s';
+        menu.style.transform = 'translateX(0px)';
+    }
+}
+
+// play song from list
+function playSongFromList(e) {
+    console.log(e);
+    const id = e.target.id;
+    console.log(id);
+
+
+    if (id === 'song1') {
+        console.log('1');
+        track.src = tracks[0].track;
+        play();
+        album.src = tracks[0].cover;
+        title.innerHTML = tracks[0].tittle;
+        artist.innerHTML = tracks[0].artist;
+    }
+
+    if (id === 'song2') {
+        console.log('2');
+        previousButtonUnable.style.display = 'none';
+        previousButton.style.display = 'block';
+        counter = 1;
+        track.src = tracks[1].track;
+        play();
+        album.src = tracks[1].cover;
+        title.innerHTML = tracks[1].tittle;
+        artist.innerHTML = tracks[1].artist;
+    }
+
+    if (id === 'song3') {
+        console.log('3');
+        previousButtonUnable.style.display = 'none';
+        previousButton.style.display = 'block';
+        counter = 2;
+        track.src = tracks[2].track;
+        play();
+        album.src = tracks[2].cover;
+        title.innerHTML = tracks[2].tittle;
+        artist.innerHTML = tracks[2].artist;
+    }
+
+    if (id === 'song4') {
+        console.log('4');
+        previousButtonUnable.style.display = 'none';
+        previousButton.style.display = 'block';
+        nextButton.style.display = 'none';
+        nextButtonUnable.style.display = 'block';
+        counter = 3;
+        track.src = tracks[3].track;
+        play();
+        album.src = tracks[3].cover;
+        title.innerHTML = tracks[3].tittle;
+        artist.innerHTML = tracks[3].artist;
+    }
 }
