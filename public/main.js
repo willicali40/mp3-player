@@ -17,6 +17,8 @@ const song1 = document.querySelector('#song1');
 const song2 = document.querySelector('#song2');
 const song3 = document.querySelector('#song3');
 const song4 = document.querySelector('#song4');
+const barsContainer = document.querySelectorAll('#player-time_display > div');
+const timeContainer = document.querySelector('#time-container');
 
 
 previousButton.addEventListener('click', previous);
@@ -72,12 +74,14 @@ function play() {
     track.play();
     playButton.style.display = 'none';
     pauseButton.style.display = 'block';
+    audioWave();
 }
 
 function pause() {
     track.pause();
     playButton.style.display = 'block';
     pauseButton.style.display = 'none';
+    animationStopped();
 }
 
 let counter = 0;
@@ -284,4 +288,20 @@ function playSongFromList(e) {
         title.innerHTML = tracks[3].tittle;
         artist.innerHTML = tracks[3].artist;
     }
+}
+
+// audio waves
+
+function audioWave() {
+    barsContainer.forEach((clas) => {
+        // clas.style.animation = 'wave .3s linear 0s infinite alternate';
+        clas.style.display = 'flex';
+    });
+}
+
+function animationStopped() {
+    barsContainer.forEach((clas) => {
+        // clas.style.animation = 'none';
+        clas.style.display = 'none';
+    });
 }
