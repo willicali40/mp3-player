@@ -32,6 +32,17 @@ song2.addEventListener('click', playSongFromList);
 song3.addEventListener('click', playSongFromList);
 song4.addEventListener('click', playSongFromList);
 
+
+
+const url = 'https://lenguajejs.com/retos/nivel-medio/mp3-player/songs.json.txt';
+
+fetch(url)
+    .then(data  => data.json())
+    .then(res => console.log(res))
+
+
+
+
 // playlist
 const tracks = [
     {
@@ -246,6 +257,10 @@ function playSongFromList(e) {
         console.log('1');
         track.src = tracks[0].track;
         play();
+        nextButton.style.display = 'block';
+        nextButtonUnable.style.display = 'none';
+        previousButtonUnable.style.display = 'block';
+        previousButton.style.display = 'none';
         album.src = tracks[0].cover;
         title.innerHTML = tracks[0].tittle;
         artist.innerHTML = tracks[0].artist;
